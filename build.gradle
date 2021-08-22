@@ -1,29 +1,29 @@
-buildscript {
-    ext{
-        springBootVersion = '2.3.9.RELEASE'
-    }
-    repositories {
-        mavenCentral()
-    }
-    dependencies{
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-
-    }
+plugins {
+    id 'org.springframework.boot' version '2.5.2'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
 }
 
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management'
-
-group 'com.p02'
+group 'com.ten.p02'
 version '1.0-SNAPSHOT'
+
+sourceCompatibility = '1.8'
 
 repositories {
     mavenCentral()
 }
 
-dependencies{
-    compileOnly('org.springframework.boot:spring-boot-starter-web')
-    testCompileOnly('org.springframework.boot:spring-boot-starter-test')
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    runtimeOnly 'com.h2database:h2'
+
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+
+    annotationProcessor("org.projectlombok:lombok")
+    compileOnly("org.projectlombok:lombok")
 }
+test {
+    useJUnitPlatform()
+}
+
